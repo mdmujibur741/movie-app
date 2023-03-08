@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+
+
+
+.btn-edit{
+        @apply bg-indigo-700 text-white px-2 py-1 rounded-lg;
+}
+
+.btn-delete{
+    @apply bg-red-500 text-white px-2 py-1 rounded-lg;
+}
+
+.dash-sideNav{
+     @apply flex items-center p-2 text-base font-normal text-gray-800 rounded-lg dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700;
+}

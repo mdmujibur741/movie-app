@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\CastController;
+use App\Http\Controllers\admin\EpisodeController;
+use App\Http\Controllers\admin\GenreController;
+use App\Http\Controllers\admin\MovieController;
+use App\Http\Controllers\admin\SeasonController;
+use App\Http\Controllers\admin\TagController;
+use App\Http\Controllers\admin\TvShowController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,7 +36,19 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/admin', function ()
-{
-    return Inertia::render('admin/index');
+Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', function ()
+    {
+        return Inertia::render('admin/index');
+    })->name('index');
+    Route::resource('movies', MovieController::class);
+    Route::resource('tv-shows', TvShowController::class);
+    Route::resource('series/{tv-shows}/seasons', SeasonController::class);
+    Route::resource('series/{tv-shows}/seasons/{season}/episodes', EpisodeController::class);
+    Route::resource('genres', GenreController::class);
+    Route::resource('casts', CastController::class);
+    Route::resource('tags', TagController::class);
 });
+
+
+
