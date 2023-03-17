@@ -17,3 +17,11 @@
 .dash-sideNav{
      @apply flex items-center p-2 text-base font-normal text-gray-800 rounded-lg dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700;
 }
+
+.toast{
+      @apply absolute right-0 top-0 z-50 flex items-center w-64 bg-green-500 border-l-4 border-green-700 py-2 px-3 shadow-lg mb-2;
+}
+
+.toast-icon{
+     @apply text-green-500 rounded-full text-2xl bg-white mr-3 w-7 h-7 text-center align-middle font-semibold;
+}

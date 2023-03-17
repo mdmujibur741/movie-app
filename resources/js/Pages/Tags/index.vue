@@ -95,13 +95,15 @@ function getPage(){
 
 
             
-                 <select @change="getPage()" v-model="perPage" class="mt-1 block w-24 px-2 py-0 rounded-lg" >
-                        <option value="5" > <b>Per 5</b> </option>
-                        <option value="10" > <b>Per 10</b> </option>
-                        <option value="20"> <b>Per 20</b> </option>
-                        <option value="50"> <b>Per 50</b> </option>
-                        <option value="100"> <b>Per 100</b> </option>
-                 </select>
+                <div class="pt-2">
+                  <select @change="getPage()" v-model="perPage" class="mt-1 block w-24 h-9 rounded-lg" >
+                    <option value="5" > <b>Per 5</b> </option>
+                    <option value="10" > <b>Per 10</b> </option>
+                    <option value="20"> <b>Per 20</b> </option>
+                    <option value="50"> <b>Per 50</b> </option>
+                    <option value="100"> <b>Per 100</b> </option>
+             </select>
+                </div>
               </div>
             <table class="w-full">
               <thead>
