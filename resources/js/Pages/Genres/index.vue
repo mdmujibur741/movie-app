@@ -18,10 +18,10 @@ const props = defineProps({
       filters: Object
 })
 
+const form = useForm({});
 
-const form = useForm({
-     
-})
+
+
 
 const submit = ()=>{
            form.post(route('admin.genres.store'),{
@@ -149,6 +149,8 @@ function getPage(){
               <Pagination :links="props.genres.meta.links"/>
           </div>
        
+      
+
      
     </section>
   </AdminLayout>

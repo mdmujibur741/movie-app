@@ -11,14 +11,14 @@ import AdminLayout from '../../Layouts/AdminLayout.vue';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
-     cast : Object
+    tv_show : Object
 })
 
 
-const form = useForm(props.cast)
+const form = useForm(props.tv_show)
 
 const submit = ()=>{
-      form.put(route('admin.casts.update', props.cast.slug))
+      form.put(route('admin.tv-shows.update', props.tv_show.slug))
 }
 </script>
 
@@ -38,19 +38,24 @@ const submit = ()=>{
 <InputError class="mt-2" :message="form.errors.name" />
 </div>         
 
-
-
+<div class="mt-4">
+    <InputLabel class="font-bold text-slate-900" for="priority" value="Created Year" />
+    <TextInput id="created_year" v-model="form.created_year" type="text"  class="mt-1 block w-full" placeholder="Enter created_year"/>
+    <InputError class="mt-2" :message="form.errors.created_year" />
+    </div>
 
 <div class="mt-4">
-     <InputLabel class="font-bold text-slate-900" for="priority" value="Poster_path" />
-     <TextInput id="poster_path" v-model="form.poster_path" type="text"  class="mt-1 block w-full" placeholder="Enter Poster_path"/>
-     <InputError class="mt-2" :message="form.errors.poster_path" />
-     </div>
+<InputLabel class="font-bold text-slate-900" for="priority" value="Poster_path" />
+<TextInput id="poster_path" v-model="form.poster_path" type="text"  class="mt-1 block w-full" placeholder="Enter Poster_path"/>
+<InputError class="mt-2" :message="form.errors.poster_path" />
+</div>
+
+
 
 
 <div class="mt-4 flex justify-center">      
 <PrimaryButton class="btn-indigo font-bold hover:bg-indigo-800" :class="{ 'opacity-80': form.processing }" :disabled="form.processing">
-    Update Cast
+    Update Tv show
 </PrimaryButton>
 
 </div>

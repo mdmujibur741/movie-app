@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('season_number');
             $table->string('slug');
-            $table->string('poster_path');
+            $table->string('poster_path')->nullable();
             $table->timestamps();
         });
     }

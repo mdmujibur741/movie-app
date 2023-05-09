@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('created_year')->nullable();
-            $table->string('poster_path');
+            $table->string('poster_path')->nullable();
             $table->bigInteger('visits')->default(1);
             $table->timestamps();
         });

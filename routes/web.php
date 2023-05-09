@@ -43,8 +43,8 @@ Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->prefix('admin')->
     })->name('index');
     Route::resource('movies', MovieController::class);
     Route::resource('tv-shows', TvShowController::class);
-    Route::resource('series/{tv-shows}/seasons', SeasonController::class);
-    Route::resource('series/{tv-shows}/seasons/{season}/episodes', EpisodeController::class);
+    Route::resource('series/{tv_shows}/seasons', SeasonController::class);
+    Route::resource('series/{tv_shows}/seasons/{season}/episodes', EpisodeController::class);
     Route::resource('genres', GenreController::class);
     Route::resource('casts', CastController::class);
     Route::resource('tags', TagController::class);

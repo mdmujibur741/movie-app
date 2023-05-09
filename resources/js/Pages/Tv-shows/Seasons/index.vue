@@ -1,5 +1,5 @@
 <script setup>
-import AdminLayout from "../../Layouts/AdminLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { Link, useForm } from "@inertiajs/vue3";
 import Checkbox from "@/Components/Checkbox.vue";
 import InputError from "@/Components/InputError.vue";
@@ -13,26 +13,28 @@ import Banner from "@/Components/Banner.vue";
 
 
 const props = defineProps({
-    tvShows : Object,
-      filters: Object
+    tvShow : Object,
+      filters: Object,
+      seasons :Object
+
 })
 
 
 const form = useForm({
-    tvShow_id : ''
+  season_number : ''
 })
 
 const submit = ()=>{
-           form.post(route('admin.tv-shows.store'),{
+           form.post(route('admin.seasons.store', [props.tvShow.id]),{
              onSuccess: () => form.reset()
            });
 }
 
-const search = ref(props.filters.search);
-const perPage = ref(props.filters.perPage);
+ const search = ref(props.filters.search);
+ const perPage = ref(props.filters.perPage);
 
 watch(search, value => {
-       router.get('/admin/tv-shows', {search: value, perPage: perPage.value},{
+       router.get('admin/series/{props.tvShow.id}/seasons', {search: value, perPage: perPage.value},{
           preserveState : true,
           replace :true
        });
@@ -40,7 +42,7 @@ watch(search, value => {
 
 
 function getPage(){
-  router.get('/admin/tv-shows', {search: search.value, perPage: perPage.value},{
+  router.get('admin/series/{props.tvShow.id}/seasons', {search: search.value, perPage: perPage.value},{
           preserveState : true,
           replace :true
        });
@@ -49,9 +51,9 @@ function getPage(){
 </script>
 <template>
   <AdminLayout>
-     <section class="min-h-[100vh] bg-indigo-100 p-5 rounded-lg drop-shadow-lg relative">
+    <section class="min-h-[100vh] bg-indigo-100 p-5 rounded-lg drop-shadow-lg relative">
       
-      <div v-if="$page.props.flash.message"  class="toast">
+     <div v-if="$page.props.flash.message"  class="toast">
        <div class="toast-icon">
         <i class="fa-regular fa-circle-check"></i>
        </div>
@@ -65,21 +67,21 @@ function getPage(){
           >
             <div>
               <h2 class="text-xl font-bold rounded-lg text-black text-center">
-             Tv Show page
+             Tv Show Season page
               </h2>
             </div>
            
           </div> 
      
 
-        <!-- Tag Form  -->
+        <!-- Season Form  -->
       
-         <form @submit.prevent="submit" class=" p-3  flex justify-end items-center  rounded-lg">
+          <form @submit.prevent="submit" class=" p-3  flex justify-end items-center  rounded-lg">
           <div class="bg-blue-100 drop-shadow-lg p-2 flex justify-end rounded-lg">
             <div class="">
-                <InputLabel for="tvShow_id" value="Tv Show Id" class="mb-3"/>
-                <TextInput  id="tvShow_id" v-model="form.tvShow_id"  class="mt-1 block w-full px-3 py-1" placeholder="Enter Tv Show Id"/>
-                <InputError class="mt-2" :message="form.errors.tvShow_id" />
+                <InputLabel for="season_no" value="Tv Season No" class="mb-3"/>
+                <TextInput  id="season_no" v-model="form.season_number"  class="mt-1 block w-full px-3 py-1" placeholder="Enter Tv Season Number"/>
+                <InputError class="mt-2" :message="form.errors.season_number" />
               </div>
   
   
@@ -94,8 +96,8 @@ function getPage(){
    
 
       
-                  <!-- Tag Table -->
-      <div class="w-full overflow-x-auto drop-shadow-xl rounded-xl">
+                  <!-- season Table -->
+        <div class="w-full overflow-x-auto drop-shadow-xl rounded-xl">
               <div class="flex my-1 justify-between items-center  gap-5 m-1 ">
 
                 <div class="pt-2 relative  text-gray-600">
@@ -126,35 +128,36 @@ function getPage(){
                   <th class="px-4 py-2">SL</th>
                   <th class="px-4 py-2">Name</th>
                   <th class="px-4 py-2">Slug</th>
-                 
+                  <th class="px-4 py-2">Season No</th>
                   <th class="px-4 py-2">Poster</th>
                   <th class="px-4 py-2">Manage</th>
                 </tr>
               </thead>
-               <tbody class="bg-white">
-                <tr v-for="(tv, index) in props.tvShows.data" :key="tv.index" class="text-gray-700">
+              <tbody class="bg-white">
+                <tr v-for="(season, index) in props.seasons.data" :key="season.index" class="text-gray-700">
                   <td class="px-4 py-2 border"> {{ index+1 }} </td>
-                  <td class="px-4 py-2  border"> {{tv.name}} </td>
-                  <td class="px-4 py-2  border"> {{tv.slug}} </td>
-                  <td class="px-4 py-2  border"> {{tv.poster_path}} </td>
+                  <td class="px-4 py-2  border"> {{season.name}} </td>
+                  <td class="px-4 py-2  border"> {{season.slug}} </td>
+                  <td class="px-4 py-2  border"> {{season.season_number}} </td>
+                  <td class="px-4 py-2  border"> {{season.poster_path}} </td>
 
                   <td class="px-4 py-2  border">
                     <div class="flex justify-start gap-3 lg:gap-2">
-                      <Link :href="route('admin.seasons.index',tv.id)" class="btn bg-green-600 hover:bg-green-800">
-                        Season
+                      <Link :href="route('admin.episodes.index',[season.tv_show_id, season.slug,])" class="btn bg-green-600 hover:bg-green-800">
+                        Episode
                         </Link>
-                      <Link :href="route('admin.tv-shows.edit',tv.slug)" class="btn-edit">
+                      <Link :href="route('admin.seasons.edit', [season.tv_show_id, season.slug])" class="btn-edit">
                         <i class="fa-solid fa-pen-to-square"></i >
                         </Link>
-                      <Link :href="route('admin.tv-shows.destroy',tv.slug)" as="button" method="delete" class="btn-delete">
+                      <Link :href="route('admin.seasons.destroy', [season.tv_show_id, season.slug])" as="button" method="delete" class="btn-delete">
                         <i class="fa-solid fa-trash"></i>
                       </Link>
                     </div>
                   </td>
                 </tr>
-              </tbody> 
+              </tbody>
             </table>
-              <Pagination :links="props.tvShows.meta.links"/>
+              <Pagination :links="props.seasons.links"/>
           </div> 
        
      
