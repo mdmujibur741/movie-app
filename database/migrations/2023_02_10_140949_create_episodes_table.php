@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('is_public')->default(0);
             $table->bigInteger('visits')->default(1);
             $table->string('slug');
-            $table->text('overview');
+            $table->text('overview')->nullable();
             $table->timestamps();
         });
     }

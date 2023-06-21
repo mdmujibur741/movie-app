@@ -18,4 +18,8 @@ class Season extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
+    public function episodes()  {
+        return $this->hasMany(Episode::class);
+    }
+
 }

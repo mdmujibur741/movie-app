@@ -25,7 +25,7 @@ const form = useForm({
 })
 
 const submit = ()=>{
-           form.post(route('admin.episodes.store', [props.tvShow.id]),{
+           form.post(route('admin.episodes.store', [props.tvShow.id, props.season.id]),{
              onSuccess: () => form.reset()
            });
 }
@@ -34,7 +34,7 @@ const submit = ()=>{
  const perPage = ref(props.filters.perPage);
 
 watch(search, value => {
-       router.get(`admin/series/${props.tvShow.id}/seasons/${props.season.id}/episodes`, {search: value, perPage: perPage.value},{
+       router.get(`/admin/series/${props.tvShow.id}/seasons/${props.season.id}/episodes`, {search: value, perPage: perPage.value},{
           preserveState : true,
           replace :true
        });
@@ -42,7 +42,7 @@ watch(search, value => {
 
 
 function getPage(){
-  router.get(`admin/series/${props.tvShow.id}/seasons/${props.season.id}/episodes`, {search: search.value, perPage: perPage.value},{
+  router.get(`/admin/series/${props.tvShow.id}/seasons/${props.season.id}/episodes`, {search: search.value, perPage: perPage.value},{
           preserveState : true,
           replace :true
        });
@@ -143,13 +143,18 @@ function getPage(){
                         <td class="px-4 py-2  border"> {{episode.name}} </td>
                         <td class="px-4 py-2  border"> {{episode.slug}} </td>
                         <td class="px-4 py-2  border"> {{episode.episode_number}} </td>
-                        <td class="px-4 py-2  border"> {{episode.is_public}} </td>
+                        <td class="px-4 py-2  border"> 
+                          <span v-if="episode.is_public ==1" class="text-white p-1 text-sm bg-blue-600 rounded-md shadow-xl">
+                                  Publish
+                          </span>
+                          <span v-else class="text-white p-1 text-sm bg-red-600 rounded-md shadow-xl">
+                            Unpublish
+                    </span>
+
+                        </td>
       
                         <td class="px-4 py-2  border">
                           <div class="flex justify-start gap-3 lg:gap-2">
-                            <Link :href="route('admin.episodes.index',[tvShow.slug, episode.season_id, episode.id] )" class="btn bg-green-600 hover:bg-green-800">
-                              Season
-                              </Link>
                             <Link :href="route('admin.episodes.edit',[tvShow.slug, episode.season_id, episode.id])" class="btn-edit">
                               <i class="fa-solid fa-pen-to-square"></i >
                               </Link>

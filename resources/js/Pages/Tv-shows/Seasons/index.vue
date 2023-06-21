@@ -34,7 +34,7 @@ const submit = ()=>{
  const perPage = ref(props.filters.perPage);
 
 watch(search, value => {
-       router.get('admin/series/{props.tvShow.id}/seasons', {search: value, perPage: perPage.value},{
+       router.get(`/admin/series/${props.tvShow.id}/seasons`, {search: value, perPage: perPage.value},{
           preserveState : true,
           replace :true
        });
@@ -42,7 +42,7 @@ watch(search, value => {
 
 
 function getPage(){
-  router.get('admin/series/{props.tvShow.id}/seasons', {search: search.value, perPage: perPage.value},{
+  router.get(`/admin/series/${props.tvShow.id}/seasons`, {search: search.value, perPage: perPage.value},{
           preserveState : true,
           replace :true
        });

@@ -1,4 +1,4 @@
-<script setup>
+ <script setup>
      import { Link,Head, useForm } from '@inertiajs/vue3';
 import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -31,7 +31,7 @@ const submit = ()=>{
    
      
          <!-- form -->
-         <form @submit.prevent="submit"  class="lg:w-6/12 w-full mx-auto p-6 drop-shadow-lg bg-gray-100 rounded-lg">
+      <form @submit.prevent="submit"  class="lg:w-6/12 w-full mx-auto p-6 drop-shadow-lg bg-gray-100 rounded-lg">
             <h3 class="text-2xl font-bold capitalize p-1 mb-5 text-center">Season Edit</h3>
 <div>
 <InputLabel class="font-bold text-slate-900" for="name" value="Name" />
@@ -63,4 +63,5 @@ const submit = ()=>{
 
 </section>
 </AdminLayout>
-</template>
+</template> 
+
