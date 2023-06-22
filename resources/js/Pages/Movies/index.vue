@@ -13,19 +13,18 @@ import Banner from "@/Components/Banner.vue";
 
 
 const props = defineProps({
-    tvShow : Object,
       filters: Object,
-      seasons :Object
+      movies :Object
 
 })
 
 
 const form = useForm({
-  season_number : ''
+  movieTMDBId : ''
 })
 
 const submit = ()=>{
-           form.post(route('admin.seasons.store', [props.tvShow.id]),{
+           form.post(route('admin.movies.store'),{
              onSuccess: () => form.reset()
            });
 }
@@ -34,15 +33,16 @@ const submit = ()=>{
  const perPage = ref(props.filters.perPage);
 
 watch(search, value => {
-       router.get(`/admin/series/${props.tvShow.id}/seasons`, {search: value, perPage: perPage.value},{
+       router.get(`/admin/movies`, {search: value, perPage: perPage.value},{
           preserveState : true,
           replace :true
-       });
+       }
+       );
 })
 
 
 function getPage(){
-  router.get(`/admin/series/${props.tvShow.id}/seasons`, {search: search.value, perPage: perPage.value},{
+  router.get(`/admin/movies`, {search: search.value, perPage: perPage.value},{
           preserveState : true,
           replace :true
        });
@@ -67,21 +67,21 @@ function getPage(){
           >
             <div>
               <h2 class="text-xl font-bold rounded-lg text-black text-center">
-             Tv Show Season page
+           Movie page
               </h2>
             </div>
            
           </div> 
      
 
-        <!-- Season Form  -->
+        <!-- Movie Form  -->
       
           <form @submit.prevent="submit" class=" p-3  flex justify-end items-center  rounded-lg">
           <div class="bg-blue-100 drop-shadow-lg p-2 flex justify-end rounded-lg">
             <div class="">
                 <InputLabel for="season_no" value="Tv Season No" class="mb-3"/>
-                <TextInput  id="season_no" v-model="form.season_number"  class="mt-1 block w-full px-3 py-1" placeholder="Enter Tv Season Number"/>
-                <InputError class="mt-2" :message="form.errors.season_number" />
+                <TextInput  id="movieTMDBId" v-model="form.movieTMDBId"  class="mt-1 block w-full px-3 py-1" placeholder="Enter Movie Number"/>
+                <InputError class="mt-2" :message="form.errors.movieTMDBId" />
               </div>
   
   
@@ -96,7 +96,7 @@ function getPage(){
    
 
       
-                  <!-- season Table -->
+                  <!-- Movie Table -->
         <div class="w-full overflow-x-auto drop-shadow-xl rounded-xl">
               <div class="flex my-1 justify-between items-center  gap-5 m-1 ">
 
@@ -126,30 +126,31 @@ function getPage(){
                   class="text-sm font-semibold tracking-wide text-left text-gray-900 bg-gray-100 capitalize border-b border-gray-600"
                 >
                   <th class="px-4 py-2">SL</th>
-                  <th class="px-4 py-2">Name</th>
-                  <th class="px-4 py-2">Slug</th>
-                  <th class="px-4 py-2">Season No</th>
-                  <th class="px-4 py-2">Poster</th>
+                  <th class="px-4 py-2">Title</th>
+                  <th class="px-4 py-2">Release date</th>
+                   <th class="px-4 py-2">Public</th>
+                  <th class="px-4 py-2">Poster</th> 
                   <th class="px-4 py-2">Manage</th>
                 </tr>
               </thead>
               <tbody class="bg-white">
-                <tr v-for="(season, index) in props.seasons.data" :key="season.index" class="text-gray-700">
+                <tr v-for="(movie, index) in props.movies.data" :key="movie.index" class="text-gray-700">
                   <td class="px-4 py-2 border"> {{ index+1 }} </td>
-                  <td class="px-4 py-2  border"> {{season.name}} </td>
-                  <td class="px-4 py-2  border"> {{season.slug}} </td>
-                  <td class="px-4 py-2  border"> {{season.season_number}} </td>
-                  <td class="px-4 py-2  border"> {{season.poster_path}} </td>
+                  <td class="px-4 py-2  border"> {{movie.title}} </td>
+                <td class="px-4 py-2  border" >     {{ movie.release_date}} </td>
+                  <td class="px-4 py-2  border"> 
+                           <span v-if="movie.is_public" class="bg-blue-600 p-2 rounded-2xl text-white text-sm">Publish</span>  
+                           <span v-else class="bg-red-600 p-2 rounded-2xl text-white text-sm">Unpublish</span>  
+                  </td> 
+                  <td class="px-4 py-2  border"> <img :src="`https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster_path}`" alt="" > </td>
 
                   <td class="px-4 py-2  border">
                     <div class="flex justify-start gap-3 lg:gap-2">
-                      <Link :href="route('admin.episodes.index',[season.tv_show_id, season.slug,])" class="btn bg-green-600 hover:bg-green-800">
-                        Episode
-                        </Link>
-                      <Link :href="route('admin.seasons.edit', [season.tv_show_id, season.slug])" class="btn-edit">
+                   
+                      <Link :href="route('admin.movies.edit', [movie.id])" class="btn-edit">
                         <i class="fa-solid fa-pen-to-square"></i >
                         </Link>
-                      <Link :href="route('admin.seasons.destroy', [season.tv_show_id, season.slug])" as="button" method="delete" class="btn-delete">
+                      <Link :href="route('admin.movies.destroy', [movie.id])" as="button" method="delete" class="btn-delete">
                         <i class="fa-solid fa-trash"></i>
                       </Link>
                     </div>
@@ -157,10 +158,16 @@ function getPage(){
                 </tr>
               </tbody>
             </table>
-              <Pagination :links="props.seasons.links"/>
+              <Pagination :links="props.movies.links"/>
           </div> 
        
      
     </section>
   </AdminLayout>
 </template>
+
+<style scoped>
+     table img{
+              width: 90px;
+     }
+</style>

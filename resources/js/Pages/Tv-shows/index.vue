@@ -136,7 +136,9 @@ function getPage(){
                   <td class="px-4 py-2 border"> {{ index+1 }} </td>
                   <td class="px-4 py-2  border"> {{tv.name}} </td>
                   <td class="px-4 py-2  border"> {{tv.slug}} </td>
-                  <td class="px-4 py-2  border"> {{tv.poster_path}} </td>
+                  <td class="px-4 py-2  border"> 
+                     <img :src="`https://www.themoviedb.org/t/p/w220_and_h330_face/${tv.poster_path}`" alt="">
+                    </td>
 
                   <td class="px-4 py-2  border">
                     <div class="flex justify-start gap-3 lg:gap-2">
@@ -161,3 +163,12 @@ function getPage(){
     </section>
   </AdminLayout>
 </template>
+
+
+<style>
+        table img{
+                   width: 80px;
+        }
+  
+
+</style>
