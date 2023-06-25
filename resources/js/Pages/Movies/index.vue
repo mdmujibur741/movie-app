@@ -7,9 +7,10 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Pagination from "@/Components/Pagination.vue";
-import {ref, watch} from'vue';
+import {ref, watch, reactive} from'vue';
 import { router } from "@inertiajs/vue3";
 import Banner from "@/Components/Banner.vue";
+import {throttle, pickBy} from 'lodash';
 
 
 const props = defineProps({
@@ -29,24 +30,44 @@ const submit = ()=>{
            });
 }
 
- const search = ref(props.filters.search);
- const perPage = ref(props.filters.perPage);
-
-watch(search, value => {
-       router.get(`/admin/movies`, {search: value, perPage: perPage.value},{
-          preserveState : true,
-          replace :true
-       }
-       );
-})
 
 
-function getPage(){
-  router.get(`/admin/movies`, {search: search.value, perPage: perPage.value},{
-          preserveState : true,
-          replace :true
-       });
-}
+ const movieFilter = reactive({
+     search : props.filters.search,
+     perPage : props.filters.perPage,
+ });
+
+watch(movieFilter,
+  throttle( ()=>{
+        let query = pickBy(movieFilter);
+        let queyRoute = route('admin.movies.index', Object.keys(query).length ? query :{
+            remember : 'forget'
+        });
+        router.get(queyRoute, {},{
+           preserveState :true,
+           replace : true
+        })
+  },500),{
+      deep : true
+  }
+
+)
+
+// watch(search, value => {
+//        router.get(`/admin/movies`, {search: value, perPage: perPage.value},{
+//           preserveState : true,
+//           replace :true
+//        }
+//        );
+// })
+
+
+// function getPage(){
+//   router.get(`/admin/movies`, {search: search.value, perPage: perPage.value},{
+//           preserveState : true,
+//           replace :true
+//        });
+// }
 
 </script>
 <template>
@@ -101,7 +122,7 @@ function getPage(){
               <div class="flex my-1 justify-between items-center  gap-5 m-1 ">
 
                 <div class="pt-2 relative  text-gray-600">
-                  <TextInput v-model="search" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                  <TextInput v-model="movieFilter.search" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                     type="search"  placeholder="Search"/>
                   <span type="submit" class="absolute right-0 top-0 mt-5 mr-4">
                     <i class="fa-solid fa-magnifying-glass text-lg"></i>
@@ -111,7 +132,7 @@ function getPage(){
 
             
               <div class="pt-2">
-                <select @change="getPage()" v-model="perPage" class="block w-24 h-9 px-2 m-0 rounded-lg" >
+                <select @change="movieFilter.perPage === $event.target.value" v-model="movieFilter.perPage" class="block w-24 h-9 px-2 m-0 rounded-lg" >
                   <option value="5" > <b>Per 5</b> </option>
                   <option value="10" > <b>Per 10</b> </option>
                   <option value="20"> <b>Per 20</b> </option>
@@ -147,6 +168,10 @@ function getPage(){
                   <td class="px-4 py-2  border">
                     <div class="flex justify-start gap-3 lg:gap-2">
                    
+                      <Link :href="route('admin.movies.attach', [movie.id])" class="btn bg-green-500">
+                        <i class="fa-solid fa-layer-group"></i>
+                        </Link>
+
                       <Link :href="route('admin.movies.edit', [movie.id])" class="btn-edit">
                         <i class="fa-solid fa-pen-to-square"></i >
                         </Link>

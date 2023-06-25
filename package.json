@@ -20,7 +20,9 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.3.0",
-        "@headlessui/vue": "^1.7.13",
-        "toastr": "^2.1.4"
+        "@headlessui/vue": "^1.7.14",
+        "@vueform/multiselect": "^2.6.2",
+        "toastr": "^2.1.4",
+        "vue-multiselect": "^2.1.7"
     }
 }

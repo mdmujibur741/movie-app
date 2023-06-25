@@ -30,3 +30,7 @@
 .toast-icon{
      @apply text-green-500 rounded-full text-2xl bg-white mr-3 w-7 h-7 text-center align-middle font-semibold;
 }
+
+.checkbox{
+      @apply rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50;
+}

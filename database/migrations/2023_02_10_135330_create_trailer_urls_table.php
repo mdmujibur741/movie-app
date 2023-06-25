@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('embed_html');
-            $table->integer('trailerable_id');
-            $table->string('trailerable_type');
+            $table->integer('trailerable_id')->nullable();
+            $table->string('trailerable_type')->nullable();
             $table->timestamps();
         });
     }
