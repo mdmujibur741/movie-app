@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -41,6 +42,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                  'message' => session('message')
             ],
+            'genres' => Genre::select('id', 'title', 'slug')->get(),
         ]);
     }
 }

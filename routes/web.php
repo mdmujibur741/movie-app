@@ -63,9 +63,9 @@ Route::get('/movies/{slug}', [FrontendMovieController::class, 'show'])->name('we
 Route::get('/series', [FrontendTvShowController::class, 'index'])->name('web.tvShows');
 Route::get('/series/{slug}', [FrontendTvShowController::class, 'show'])->name('web.tvShows.show');
 Route::get('/series/{tvSlug}/season/{seasonSlug}', [FrontendTvShowController::class, 'season'])->name('web.tvShows.seasons');
-Route::get('/series/{tvSlug}/season/{seasonSlug}/episode/{episodeSlug}', [FrontendTvShowController::class, 'Episode'])->name('web.tvShows.episodes');
+Route::get('/series/{tvSlug}/season/{seasonSlug}/episode/{episodeSlug}', [FrontendTvShowController::class, 'episode'])->name('web.tvShows.episodes');
 Route::get('/casts', [FrontendCastController::class, 'index'])->name('web.casts');
  Route::get('/casts/{slug}', [FrontendCastController::class, 'show'])->name('web.cast.show');
-//Route::get('/genre/{slug}', [FrontendGenresController::class, 'show'])->name('web.genres.show');
+Route::get('/genre/{slug}', [FrontendGenresController::class, 'index'])->name('web.genres.show');
 
 

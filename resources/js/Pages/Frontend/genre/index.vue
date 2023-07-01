@@ -6,7 +6,7 @@ import Pagination from '@/Components/Pagination.vue';
 
 const props = defineProps({
     movies : Object,
-   
+    genre : String,
 })
 
 </script>
@@ -22,7 +22,7 @@ const props = defineProps({
         <div  class=" m-2 p-2 text-2xl font-bold text-indigo-600 dark:text-indigo-300
         "
       >
-        <h1 class="text-black dark:text-slate-400 text-xl capitalize font-bold">Movies</h1>
+        <h1 class="text-black dark:text-slate-400 text-xl capitalize font-bold"> {{ genre }} Movies</h1>
       </div>
  
        <div class=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 rounded">
@@ -73,9 +73,7 @@ const props = defineProps({
                     group-hover:text-blue-700
                   "
                 >
-                  <span v-for="genre in movie.genres" :key="genre.id">
-                    {{ genre.title }}
-                  </span>
+                  
                 </div>
               </Link>
             </template>
@@ -101,3 +99,4 @@ const props = defineProps({
     
 </FrontendLayout>
 </template>
+

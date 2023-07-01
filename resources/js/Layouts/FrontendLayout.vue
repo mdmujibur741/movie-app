@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import Dropdown from '@/Components/Dropdown.vue';
-import Footer from '@/Components/Footer.vue'
+import Footer from '@/Components/Footer.vue';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 
 
 defineProps({
@@ -12,6 +13,7 @@ defineProps({
 const showingNavigationDropdown = ref(false);
 const open = ref(false);
 const openMobileMenu = ref(false);
+
 
 
 const logout = () => {
@@ -25,7 +27,7 @@ const logout = () => {
 
        
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
               <!-- navbar -->
               <div
               class="w-full text-gray-700 bg-white dark:text-gray-200 dark:bg-gray-800"
@@ -134,7 +136,9 @@ const logout = () => {
                     href="/casts"
                     >Casts</Link
                   >
-                  <Dropdown />
+                    
+                 <Dropdown/>
+        
                 </nav>
               </div>
             </div>

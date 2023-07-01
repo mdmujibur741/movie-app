@@ -17,14 +17,14 @@ const props = defineProps({
 
 
     <!-- Movie Section -->
-     <section class="bg-gray-50 dark:bg-gray-900 dark:text-white mt-4 p-2 rounded">
+     <section class="bg-blue-100 dark:bg-gray-900 dark:text-white mt-4 p-3 rounded">
         <div  class=" m-2 p-2 text-2xl font-bold text-indigo-600 dark:text-indigo-300
         "
       >
-        <h1 class="text-center text-xl capitalize font-bold">Movies</h1>
+        <h1 class="text-black dark:text-slate-400 text-xl capitalize font-bold">Movies</h1>
       </div>
  
-       <div class=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 rounded">
+       <div class=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 rounded">
         <Card v-for="movie in movies" :key="movie.id">
             <template #image>
               <Link :href="`/movies/${movie.slug}`">
@@ -73,7 +73,7 @@ const props = defineProps({
                   "
                 >
                   <span v-for="genre in movie.genres" :key="genre.id">
-                    {{ genre.title }}
+                    {{ genre.title }} 
                   </span>
                 </div>
               </Link>
@@ -91,14 +91,14 @@ const props = defineProps({
 
 
        <!-- TvShow Section -->
-       <section class="bg-gray-50 dark:bg-gray-900 dark:text-white mt-4 p-2 rounded">
+       <section class="bg-blue-100 dark:bg-gray-900 dark:text-white mt-4 p-2 rounded">
         <div  class=" m-2 p-2 text-2xl font-bold text-indigo-600 dark:text-indigo-300
         "
       >
-        <h1 class="text-center text-xl capitalize font-bold">Tv Show</h1>
+        <h1 class="text-black dark:text-slate-400 text-xl capitalize font-bold ">Tv Show</h1>
       </div>
  
-       <div class=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 rounded">
+       <div class=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 rounded">
         <Card v-for="tv in tvShows" :key="tv.id">
             <template #image>
               <Link :href="`/series/${tv.slug}`">
@@ -148,13 +148,11 @@ const props = defineProps({
                     group-hover:text-blue-700
                   "
                 >
-                  <!-- <span v-for="genre in movie.genres" :key="genre.id">
-                    {{ genre.title }}
-                  </span> -->
+            
                 </div>
               </Link>
             </template>
-            <Link :href="`/movies/${tv.slug}`">
+            <Link :href="`/series/${tv.slug}`">
               <div class="dark:text-white font-bold group-hover:text-blue-400">
                 {{ tv.name }} <br> Season({{ tv.seasons_count }})
               </div>

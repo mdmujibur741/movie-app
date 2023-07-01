@@ -144,14 +144,15 @@ const categories = ref([
                         <h2 class="text-xl font-bold rounded-lg text-black text-center">
                           Cast Form
                               </h2>
-                        <div class="flex gap-x-4 ">
-                                <span class="bg-green-600 p-1 text-xs rounded-md text-white" v-for="cast in movieCast" :key="cast.id">
-                                        {{ cast.name }}
-                                </span>
-                        </div>
+                            
+                         
                         <div class="my-2">
-                        
-                          <div  class="flex gap-5 my-6">
+                          <div class=" gap-x-4 ">
+                            <span class="bg-green-600 p-1 text-xs rounded-md text-white" v-for="cast in movieCast" :key="cast.id">
+                                    {{ cast.name }}
+                            </span>
+                    </div>
+                          <div  class=" gap-5 my-6">
                             <label v-for="(cast,index) in props.casts" :key="cast.id" class="flex items-center">
                                 <input type="checkbox"  class="checkbox" v-model="castForm.cast" :value="cast.id" :id="cast.id"/> 
                                 <span class="ml-2 text-sm text-gray-600" :for="cast.id"> {{ cast.name }} </span>
@@ -169,6 +170,7 @@ const categories = ref([
                               Add Cast
                             </PrimaryButton>
                           </div>
+                            
                       </div>
                                   
                       </form> 
