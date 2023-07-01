@@ -22,18 +22,19 @@ const props = defineProps({
         <div  class=" m-2 p-2 text-2xl font-bold text-indigo-600 dark:text-indigo-300
         "
       >
-        <h1 class="text-black dark:text-slate-400 text-xl capitalize font-bold">Movies</h1>
+        <h1 class="text-black dark:text-slate-400 text-xl capitalize font-bold">Cast</h1>
       </div>
  
        <div class=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 rounded">
         <Card v-for="cast in casts.data" :key="cast.id">
             <template #image>
-              <Link :href="`/movies/${cast.slug}`">
+              <Link :href="`/casts/${cast.slug}`">
                 <div class="aspect-w-2 aspect-h-3">
-                  <img
+                  <img v-if="cast.poster_path"
                     class="object-cover"
                     :src="`https://www.themoviedb.org/t/p/w220_and_h330_face/${cast.poster_path}`"
                   />
+                  <img v-else src="../../../../../public/movie.jpg" alt="">
                 </div>
             
             
@@ -41,7 +42,7 @@ const props = defineProps({
            
               </Link>
             </template>
-            <Link :href="`/movies/${cast.slug}`">
+            <Link :href="`/casts/${cast.slug}`">
               <div class="dark:text-white font-bold group-hover:text-blue-400">
                 {{ cast.name }}
               </div>

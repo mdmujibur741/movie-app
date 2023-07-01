@@ -10,4 +10,8 @@ class Cast extends Model
     use HasFactory;
 
     protected $fillable = ['tmdb_id','name','slug','poster_path'];
+
+    public function movies() {
+        return $this->belongsToMany(Movie::class);
+    }
 }

@@ -15,4 +15,17 @@ class CastController extends Controller
             'casts' => Cast::orderBy('created_at', 'desc')->paginate(10),
         ]);
      }
+
+     public function show($slug) {
+         $cast = Cast::where('slug', $slug)->first();
+         $movies = $cast->movies;
+         $casts = Cast::latest()->take(6)->get();
+    
+         return Inertia::render('Frontend/cast/show',[
+            'cast' => $cast,
+            'movies' => $movies,
+            'casts' => $casts
+         ]);
+    
+     }
 }

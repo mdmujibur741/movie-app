@@ -3,7 +3,9 @@ import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import Dropdown from '@/Components/Dropdown.vue';
 import Footer from '@/Components/Footer.vue';
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import HomeModal from '../Components/HomeModal.vue';
+
+
 
 
 defineProps({
@@ -57,7 +59,7 @@ const logout = () => {
                     "
                     >Movie App</Link
                   >
-                  <SearchModal class="w-40 md:w-72" />
+                  <HomeModal class="w-40 md:w-72" />
                   <button
                     class="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
                     @click="openMobileMenu = !openMobileMenu"

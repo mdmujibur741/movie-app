@@ -198,7 +198,7 @@ function openModal() {
              
             >
               <DialogPanel
-                class="w-full max-w-md transform overflow-x-auto rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="  w-full max-w-3xl transform overflow-x-auto rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
                 style="maxHeight: 90vh " >
                 <DialogTitle
                   as="h3" v-if="triller.length > 0"
