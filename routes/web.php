@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\ArtisanController;
 use App\Http\Controllers\admin\CastController;
 use App\Http\Controllers\admin\EpisodeController;
 use App\Http\Controllers\admin\GenreController;
 use App\Http\Controllers\admin\MovieController;
 use App\Http\Controllers\admin\SeasonController;
+use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\TvShowController;
 use App\Http\Controllers\Frontend\CastController as FrontendCastController;
@@ -52,6 +54,10 @@ Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->prefix('admin')->
     Route::resource('genres', GenreController::class);
     Route::resource('casts', CastController::class);
     Route::resource('tags', TagController::class);
+    Route::resource('setting', SettingController::class);
+
+    // artisan Controller
+    Route::get('/stlink', [ArtisanController::class, 'storageLink']);
 });
 
 

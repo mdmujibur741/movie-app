@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Genre;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -43,6 +44,7 @@ class HandleInertiaRequests extends Middleware
                  'message' => session('message')
             ],
             'genres' => Genre::select('id', 'title', 'slug')->get(),
+            'setting' => Setting::select( 'name', 'logo', 'favicon', 'github', 'facebook')->first(),
         ]);
     }
 }

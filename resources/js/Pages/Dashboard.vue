@@ -13,9 +13,38 @@ import Welcome from '@/Components/Welcome.vue';
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
-                </div>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div class="bg-indigo-50 w-full h-24 p-5 rounded-2xl shadow-xl">
+                          <h2 class="text-xl ">
+                           Movie()
+                          </h2>
+                      </div>
+                      <div class="bg-indigo-50 w-full h-24 p-5 rounded-2xl shadow-xl">
+                        <h2 class="text-xl ">
+                         Movie()
+                        </h2>
+                    </div>
+                    <div class="bg-indigo-50 w-full h-24 p-5 rounded-2xl shadow-xl">
+                        <h2 class="text-xl ">
+                         Movie()
+                        </h2>
+                    </div>
+                    <div class="bg-indigo-50 w-full h-24 p-5 rounded-2xl shadow-xl">
+                        <h2 class="text-xl ">
+                         Movie()
+                        </h2>
+                    </div>
+                    <div class="bg-indigo-50 w-full h-24 p-5 rounded-2xl shadow-xl">
+                        <h2 class="text-xl ">
+                         Movie()
+                        </h2>
+                    </div>
+                    <div class="bg-indigo-50 w-full h-24 p-5 rounded-2xl shadow-xl">
+                        <h2 class="text-xl ">
+                         Movie()
+                        </h2>
+                    </div>
+                 </div>
             </div>
         </div>
     </AdminLayout>

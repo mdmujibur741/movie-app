@@ -34,3 +34,11 @@
 .checkbox{
       @apply rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50;
 }
+
+.active{
+        @apply bg-indigo-600 text-white hover:bg-indigo-800 hover:text-white rounded-lg;
+}
+
+.file_up{
+       @apply block w-full  p-1 text-xs text-gray-900 border border-gray-300 rounded-lg  bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400;
+}

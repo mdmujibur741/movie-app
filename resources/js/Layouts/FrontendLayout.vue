@@ -25,7 +25,10 @@ const logout = () => {
 
 <template>
     <div>
-        <Head :title="title" />
+       
+          <Head>
+            <link v-if="$page.props.setting" rel="icon" type="image/png"  :href="$page.props.setting.favicon"/> 
+          </Head>
 
        
 
@@ -45,6 +48,7 @@ const logout = () => {
                 "
               >
                 <div class="p-4 flex flex-row items-center justify-between space-x-2">
+                 
                   <Link
                     href="/"
                     class="
@@ -57,7 +61,9 @@ const logout = () => {
                       dark:text-white
                       focus:outline-none focus:shadow-outline
                     "
-                    >Movie App</Link
+                    >
+                     <img v-if="$page.props.setting" :src="$page.props.setting.logo" alt="" class="w-14 h-14 rounded-full">
+                    </Link
                   >
                   <HomeModal class="w-40 md:w-72" />
                   <button
